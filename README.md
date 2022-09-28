@@ -2,7 +2,7 @@
 
 Antes de correr el codigo verifica que tengas instalado lo siguiente
 
-- node v12.22.5
+- node v16.17.1
 - npm v8.19.2
 
 ---
