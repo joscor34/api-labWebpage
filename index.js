@@ -2,7 +2,8 @@
 require('dotenv').config()
 const express = require('express')
 const colors = require('colors')
-
+const user_routes = require('./routes/user')
+const customMdw = require('./middleware/custom_middelware')
 
 var cors = require('cors')
 var app = express()
@@ -25,9 +26,15 @@ app.use((req, res, next) => {
 // Configuramos el puerto donde correra la app
 const port = process.env.PORT || 8000
 
+// Conectamos todos lops routers
+app.use('/api/user', user_routes)
+
 app.get('/', (req, res) => {
 	res.send('HOLA MUNDO!!')
 })
+
+app.use(customMdw.errorHandler)
+app.use(customMdw.notFoundHandler)
 
 app.listen(port, () => {
 	console.log(colors.cyan(`La aplicacion esta corriendo en http://localhost:${port}`))
