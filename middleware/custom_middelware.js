@@ -1,8 +1,52 @@
 'use strict'
 
 const error_types = require('../controllers/error_types')
+const passport = require('passport')
+const colors = require('colors')
 
 let middleware = {
+/*
+  Este middleware va *antes* de las peticiones.
+  passport.authenticate de jwt por defecto añade en req.user el objeto que devolvamos desde
+  el callback de verificación de la estrategia jwt.
+  En este caso hemos personalizado el auth_callback de authenticate y
+  aunque también inyectamos ese dato en req.user, aprovechamos y personalizaremos las respuestas
+  para que sean tipo json.
+  */
+ ensureAuthenticated: (req,res,next)=>{
+	passport.authenticate('user-jwt', {session: false}, (err, user, info)=>{
+		console.log(colors.cyan('ejecutando *callback auth* de authenticate para estrategia user-jwt'))
+		//si hubo un error relacionado con la validez del token (error en su firma, caducado, etc)
+		if(info){ return next(new error_types.Error401(info.message)) }
+
+		//si hubo un error en la consulta a la base de datos
+		if (err) { return next(err) }
+
+		//si el token está firmado correctamente pero no pertenece a un usuario existente
+		if (!user) { return next(new error_types.Error403('You are not allowed to access.')) }
+		//inyectamos los datos de usuario en la request
+		req.user = user
+		next()
+		})(req, res, next)
+},
+ensureAuthenticatedAdmin: (req,res,next)=>{
+	passport.authenticate('admin-jwt', {session: false}, (err, user, info)=>{
+		console.log(colors.cyan('ejecutando *callback auth* de authenticate para estrategia admin-jwt'))
+		//si hubo un error relacionado con la validez del token (error en su firma, caducado, etc)
+		if(info){ return next(new error_types.Error401(info.message)) }
+
+		//si hubo un error en la consulta a la base de datos
+		if (err) { return next(err) }
+
+		//si el token está firmado correctamente pero no pertenece a un usuario existente
+		if (!user) { return next(new error_types.Error403('You are not allowed to access.')) }
+		
+		//inyectamos los datos de usuario en la request
+		req.user = user
+		next()
+		})(req, res, next)
+},
+
 
 
 	/*Este middleware va al final de todos los middleware y rutas.
