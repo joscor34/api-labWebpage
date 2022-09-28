@@ -32,10 +32,10 @@ var FileSchema = Schema({
 		required: true
 	},
 	submitted_time: {
-		type : Number  //Por revisar
+		type : Number  //Por revisar el tipo
 	},
 	last_update_time: {
-		type : Number  //Por revisar
+		type : Number  //Por revisar el tipo
 	},
 	coordinador: {
 		type: String,
