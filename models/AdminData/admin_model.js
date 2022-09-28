@@ -1,8 +1,8 @@
 'use strict'
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
 const config = require('../config')
 
-var Schema = moongose.Schema
+var Schema = mongoose.Schema
 
 var AdminSchema = Schema({
 	first_name: {
@@ -21,10 +21,6 @@ var AdminSchema = Schema({
     type: String,
     required: true
   },
-  phone_number: {
-    type: String,
-    required: true
-	},
 	user_type: {
 		type: Boolean,
 		default: true
