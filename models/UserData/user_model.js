@@ -1,8 +1,8 @@
 'use strict'
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
 const config = require('../config')
 
-var Schema = moongose.Schema
+var Schema = mongoose.Schema
 
 var UserSchema = Schema({
 	first_name: {
