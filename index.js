@@ -6,7 +6,6 @@ const user_routes = require('./routes/user')
 const admin_routes = require('./routes/admin_panel')
 const customMdw = require('./middleware/custom_middelware')
 const mongoose = require('mongoose')
-const bycrypt = require('bcrypt')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
 const LocalStrategy = require('passport-local').Strategy
@@ -14,6 +13,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const User = require('./models/UserData/user_model')
 const Admin = require('./models/AdminData/admin_model')
 const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt')
 
 var cors = require('cors')
 var app = express()
@@ -39,7 +39,7 @@ passport.use('admin-local', new LocalStrategy({
 	.then(data => {
 		if(data === null) return done(null, false) // El usuario no existe
     else if(!bcrypt.compareSync(password, data.password)) { return done(null, false) }
-    return done(null,data) // Ok
+		return done(null,data) // Ok
 	}).catch(err => done(err, null))
 }))
 
