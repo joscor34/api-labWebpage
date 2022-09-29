@@ -3,6 +3,7 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const error_types = require('./error_types')
 const Admin = require('../models/AdminData/admin_model')
+const colors = require('colors')
 
 let controller = {
   login: (req, res, next) => {
