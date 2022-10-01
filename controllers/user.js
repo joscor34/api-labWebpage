@@ -45,9 +45,9 @@ let controller = {
           var hash = bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS))
           let document = new User({
 						email: req.body.email,
-						first_name: req.body.first_name,
-						last_name: req.body.last_name,
-						phone_number: req.body.phone_number,
+						first_name: req.body.firstName,
+						last_name: req.body.lastName,
+						phone_number: req.body.phoneNumber,
             password: hash
           })
           return document.save((err) => {
