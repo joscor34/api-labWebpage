@@ -1,7 +1,7 @@
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
 const config = require('../config')
 
-var Schema = moongose.Schema
+var Schema = mongoose.Schema
 
 var FileSchema = Schema({
 	_userId: {
@@ -44,14 +44,17 @@ var FileSchema = Schema({
 		required: false
 	},
 	keywords: [{
-		keyword: {
-			type: String,
-			required: true
-		}
+		type: String,
+		required: true
 	}],
 	abstract: {
 		type: String,
 		required: true
+	},
+	pdf: {
+		data: Buffer,
 	}
 	
 })
+
+module.exports = mongoose.model(config.SchemasNames.file, FileSchema, 'files')
