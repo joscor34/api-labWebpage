@@ -4,10 +4,35 @@ const jwt = require('jsonwebtoken')
 const error_types = require('./error_types')
 const User = require('../models/UserData/user_model')
 const colors = require('colors')
+const fs = require('fs');
+const path = require('path')
+const Proyecto = require('../models/UserData/file_model')
 
 let controller = {
 	uploadFile: (req, res, next) => {
-		res.send('Felicidades, la ruta funciona')
+		console.log(colors.cyan('Creando proyecto'))
+		var proyecto = new Proyecto({
+			_userId: req.body.userId,
+			paper: req.body.paper,
+			authors: req.body.authors,
+			title: req.body.title,
+			submitted_time: Date.now(),
+			last_update_time: Date.now(),
+			coordinador: req.body.coordinador,
+			keywords: req.body.keywords,
+			abstract: req.body.abstract,
+			pdf:{
+				data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+				contentType: 'application/pdf'
+			}
+		})
+		return proyecto.save((err) => {
+			if(err){
+				return next(new error_types.InfoError(err))
+      } else {
+				res.json(proyecto)
+      }
+		})
 	},
 	register: (req, res, next) => {
     console.log(colors.bgMagenta('Caso register user'))
