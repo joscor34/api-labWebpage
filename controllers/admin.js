@@ -16,7 +16,9 @@ let controller = {
       else {
         console.log(colors.cyan('*** comienza generacion token***'))
         const payload = {
-          sub: user._id,
+					sub: user._id,
+					name: user.first_name,
+					userType: 1,
           exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
           email: user.email
         }
