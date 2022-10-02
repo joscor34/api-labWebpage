@@ -75,6 +75,7 @@ let controller = {
         const payload = {
 					sub: user._id,
 					name: user.first_name,
+					userType: 0,
           exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
           email: user.email
         }
