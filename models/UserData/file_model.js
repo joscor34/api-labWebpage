@@ -14,18 +14,8 @@ var FileSchema = Schema({
 		required: true
 	},
 	authors: [{
-		autor: {
-			type: String,
-			required: true
-		},
-		country: {
-			type: String,
-			required: true
-		},
-		affilation: {
-			type: String,
-			required: true
-		},
+		type: String,
+		required: true
 	}],
 	title: {
 		type: String,
