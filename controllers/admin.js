@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken')
 const error_types = require('./error_types')
 const Admin = require('../models/AdminData/admin_model')
 const colors = require('colors')
+const User = require('../models/UserData/user_model')
+const Proyecto = require('../models/UserData/file_model')
+
 
 let controller = {
   login: (req, res, next) => {
@@ -57,7 +60,43 @@ let controller = {
       .catch(err => {
         next(err)
       })
-  }
+	},
+	getProyectById: (req, res, next) => {
+		Proyecto.findById(req.body.proyectId).then(data => {
+			if(!data){
+				res.status(404)
+				return next(new error_types.Error404('Proyectos no existen'))
+			} else {
+				res.send(data)
+			}
+		}).catch(err => {
+			res.send(err).status(500)
+		})
+	},
+
+	getAllProyectos: (req, res, next) => {
+		Proyecto.find().then(data => {
+			if(!data || data.length === 0){
+				res.status(404)
+				return next(new error_types.Error404('Proyectos no existen'))
+			} else {
+				res.status(200).send(data)
+			}
+		})
+	},
+
+	getUserById: (req, res, next) => {
+		User.findById(req.body.userId).then(data => {
+			if(!data || data.length === 0){
+				res.status(404)
+				return next(new error_types.Error404('El usuario no existe'))
+			} else {
+				res.status(200).send(data)
+			}
+		}).catch(err => {
+			res.send(err).status(500)
+		})
+	}
 }
 
 module.exports = controller
