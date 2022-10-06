@@ -8,6 +8,9 @@ router.post('/login', AdminController.login)
 router.post('/register', AdminController.register)
 
 
+router.get('/proyectos', customMdw.ensureAuthenticatedAdmin, AdminController.getAllProyectos)
+router.post('/proyecto', customMdw.ensureAuthenticatedAdmin, AdminController.getProyectById)
+router.post('/obtenerUsuario', customMdw.ensureAuthenticatedAdmin, AdminController.getUserById)
 router.get('/prueba', customMdw.ensureAuthenticatedAdmin, (req, res, next) => {
 	res.send('Pasó la prueba')
 })
