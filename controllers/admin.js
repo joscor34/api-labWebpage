@@ -96,6 +96,13 @@ let controller = {
 		}).catch(err => {
 			res.send(err).status(500)
 		})
+	},
+	eliminateProyect: (req, res, next) => {
+		Proyecto.findByIdAndRemove(req.body.proyectId).then(data => {
+			res.send(data).status(200)
+		}).catch(err => {
+			res.send(err).status(500)
+		})
 	}
 }
 
