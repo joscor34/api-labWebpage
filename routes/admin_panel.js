@@ -11,8 +11,6 @@ router.post('/register', AdminController.register)
 router.get('/proyectos', customMdw.ensureAuthenticatedAdmin, AdminController.getAllProyectos)
 router.post('/proyecto', customMdw.ensureAuthenticatedAdmin, AdminController.getProyectById)
 router.post('/obtenerUsuario', customMdw.ensureAuthenticatedAdmin, AdminController.getUserById)
-router.get('/prueba', customMdw.ensureAuthenticatedAdmin, (req, res, next) => {
-	res.send('Pasó la prueba')
-})
+router.post('/delProyect', customMdw.ensureAuthenticatedAdmin, AdminController.eliminateProyect)
 
 module.exports = router
