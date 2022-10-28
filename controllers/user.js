@@ -7,6 +7,19 @@ const colors = require('colors')
 const fs = require('fs');
 const path = require('path')
 const Proyecto = require('../models/UserData/file_model')
+const nodemailer = require('nodemailer')
+const { text } = require('body-parser')
+
+
+nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'email',
+    pass: 'pass'
+  },
+  port: 465,
+  host: 'smtp.gmail.com'
+})
 
 let controller = {
 	uploadFile: (req, res, next) => {
@@ -55,6 +68,24 @@ let controller = {
               return res.status(500).send({ msg: err.message })
             } else {
               res.json(document)
+              nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'labweb.nonreply@gmail.com',
+                  pass: 'cambiardecontraseniapronto'
+                },
+                port: 465,
+                host: 'smtp.gmail.com'
+              }).sendMail({
+                from: 'email',
+                to: document.email,
+                subject: "Creación de cuenta",
+                text: "Felicidades se ha creado una nueva cuenta con este correo electrónico"
+              }, (err) => {
+                if(err) {
+                  console.log(err)
+                }
+              })
             }
           })
         } 
