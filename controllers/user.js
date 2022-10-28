@@ -72,7 +72,7 @@ let controller = {
                 service: 'gmail',
                 auth: {
                   user: 'labweb.nonreply@gmail.com',
-                  pass: 'cambiardecontraseniapronto'
+                  pass: 'bonkxqydopqmmdhb'
                 },
                 port: 465,
                 host: 'smtp.gmail.com'
