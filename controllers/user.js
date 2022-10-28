@@ -9,6 +9,7 @@ const path = require('path')
 const Proyecto = require('../models/UserData/file_model')
 const nodemailer = require('nodemailer')
 const { text } = require('body-parser')
+const { env } = require('process')
 
 
 nodemailer.createTransport({
@@ -72,7 +73,7 @@ let controller = {
                 service: 'gmail',
                 auth: {
                   user: 'labweb.nonreply@gmail.com',
-                  pass: 'bonkxqydopqmmdhb'
+                  pass: process.env.APPPASS
                 },
                 port: 465,
                 host: 'smtp.gmail.com'
