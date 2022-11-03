@@ -8,19 +8,7 @@ const fs = require('fs');
 const path = require('path')
 const Proyecto = require('../models/UserData/file_model')
 const nodemailer = require('nodemailer')
-const { text } = require('body-parser')
-const { env } = require('process')
-
-
-nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'email',
-    pass: 'pass'
-  },
-  port: 465,
-  host: 'smtp.gmail.com'
-})
+require('dotenv').config()
 
 let controller = {
 	uploadFile: (req, res, next) => {
@@ -85,6 +73,8 @@ let controller = {
               }, (err) => {
                 if(err) {
                   console.log(err)
+                } else {
+                  console.log('Se envió el correo correctamente :D')
                 }
               })
             }
