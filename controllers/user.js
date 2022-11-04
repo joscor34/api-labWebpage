@@ -33,8 +33,8 @@ let controller = {
 				return next(new error_types.InfoError(err))
       } else {
         res.json(proyecto)
-        User.findById(proyecto.userId).then(user => {
-          console.log(user)
+        // User.findById(proyecto.userId).then(user => {
+        //   console.log(user)
         //   nodemailer.createTransport({
         //   service: 'gmail',
         //   auth: {
