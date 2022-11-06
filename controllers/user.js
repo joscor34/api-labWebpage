@@ -56,9 +56,7 @@ let controller = {
         //   }
         // })
       }
-		}).catch(err => {
-      console.log(err)
-    })
+		})
 	},
 	register: (req, res, next) => {
     console.log(colors.bgMagenta('Caso register user'))
