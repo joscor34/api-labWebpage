@@ -33,7 +33,7 @@ let controller = {
 				return next(new error_types.InfoError(err))
       } else {
         res.json(proyecto)
-        User.findById(proyecto.userId).then(user => {
+        User.findById(proyecto._userId).then(user => {
           console.log(user)
             nodemailer.createTransport({
               service: 'gmail',
@@ -47,7 +47,7 @@ let controller = {
                 from: 'email',
                 to: user.email,
                 subject: 'Proyecto entregado',
-                html: '<html><h1>¡ENHORABUENA!' + user.firstName + '</h1><p>Tu proyecto con título:</p>' + '<b>' +proyecto.title + '</b>' + '<p> coordinado por:  </p>' + '<p>' + proyecto.coordinador + '</p> <p>Fue entregado correctamente :D</p>' +'</html>'
+                html: '<html><h1>¡ENHORABUENA! ' + user.first_name + '</h1><p> Tu proyecto con título:</p>' + '<b>' +proyecto.title + ',</b>' + '<p> coordinado por:  </p>' + '<p>' + proyecto.coordinador + '</p> <p>Fue entregado correctamente :D</p>' +'</html>'
               }, (err) => {
                 if(err) {
                   console.log(err)
