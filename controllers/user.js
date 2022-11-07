@@ -35,25 +35,26 @@ let controller = {
         res.json(proyecto)
         User.findById(proyecto.userId).then(user => {
           console.log(user)
-          nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
-            user: 'labweb.nonreply@gmail.com',
-            pass: process.env.APPPASS
-          },
-          port: 465,
-          host: 'smtp.gmail.com'
-        }).sendMail({
-          from: 'email',
-          to: user.email,
-          subject: 'Proyecto entregado',
-          html: '<html><h1>¡ENHORABUENA!' + user.firstName + '</h1><p>Tu proyecto con título:</p>' + '<b>' +proyecto.title + '</b>' + '<p> coordinado por:  </p>' + '<p>' + proyecto.coordinador + '</p> <p>Fue entregado correctamente :D</p>' +'</html>'
-        }, (err) => {
-          if(err) {
-            console.log(err)
-          } else {
-            console.log('Se envió el correo correctamente :D')
-          }
+            nodemailer.createTransport({
+              service: 'gmail',
+                auth: {
+                  user: 'labweb.nonreply@gmail.com',
+                  pass: process.env.APPPASS
+                },
+                port: 465,
+                host: 'smtp.gmail.com'
+                }).sendMail({
+                from: 'email',
+                to: user.email,
+                subject: 'Proyecto entregado',
+                html: '<html><h1>¡ENHORABUENA!' + user.firstName + '</h1><p>Tu proyecto con título:</p>' + '<b>' +proyecto.title + '</b>' + '<p> coordinado por:  </p>' + '<p>' + proyecto.coordinador + '</p> <p>Fue entregado correctamente :D</p>' +'</html>'
+              }, (err) => {
+                if(err) {
+                  console.log(err)
+                } else {
+                  console.log('Se envió el correo correctamente :D')
+                }
+          })
         })
       }
 		})
