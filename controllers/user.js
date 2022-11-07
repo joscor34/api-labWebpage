@@ -24,7 +24,7 @@ let controller = {
 			keywords: req.body.keywords,
 			abstract: req.body.abstract,
 			pdf:{
-				data: fs.readFileSync(path.join(__dirname + '/uploads/')), //+ req.file.filename
+				data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), //
 				contentType: 'application/pdf'
 			}
 		})
