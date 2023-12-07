@@ -38,7 +38,7 @@ let controller = {
             nodemailer.createTransport({
               service: 'gmail',
                 auth: {
-                  user: 'labweb.nonreply@gmail.com',
+                  user: process.env.MAILAPP,
                   pass: process.env.APPPASS
                 },
                 port: 465,
@@ -83,7 +83,7 @@ let controller = {
               nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                  user: 'labweb.nonreply@gmail.com',
+                  user: process.env.MAILAPP,
                   pass: process.env.APPPASS
                 },
                 port: 465,
